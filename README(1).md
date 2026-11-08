@@ -1,6 +1,6 @@
 # AI Text Processor
 
-**[Live Demo](YOUR_RENDER_URL)**
+**[Live Demo](https://ai-text-processor-fx0s.onrender.com)**
 
 A web application that uses Claude Haiku 4.5 to process
 user-submitted text and generate AI-powered responses.
