@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Text Processor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #243447;
+        }
+
+        .description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            background: #2457a6;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #183f7c;
+        }
+
+        button:disabled {
+            background: #888;
+            cursor: not-allowed;
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f1f5fb;
+            border-radius: 7px;
+            min-height: 80px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .error {
+            color: #b42318;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>AI Text Processor</h1>
+
+        <p class="description">
+            Enter your text and let Claude Haiku 4.5 process it.
+        </p>
+
+        <form id="textForm">
+
+            <label for="userText">Enter your text:</label>
+
+            <textarea
+                id="userText"
+                placeholder="Enter text you want Claude to process..."
+                required
+            ></textarea>
+
+            <button type="submit" id="processButton">
+                Process Text
+            </button>
+
+        </form>
+
+        <div id="resultBox" class="result-box hidden">
+            <strong>AI Result:</strong>
+            <p id="resultText"></p>
+        </div>
+
+    </div>
+
+    <script>
+        const form = document.getElementById("textForm");
+        const userText = document.getElementById("userText");
+        const processButton = document.getElementById("processButton");
+        const resultBox = document.getElementById("resultBox");
+        const resultText = document.getElementById("resultText");
+
+        form.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const text = userText.value.trim();
+
+            if (!text) {
+                resultBox.classList.remove("hidden");
+                resultText.textContent = "Please enter some text.";
+                resultText.className = "error";
+                return;
+            }
+
+            processButton.disabled = true;
+            processButton.textContent = "Processing...";
+
+            resultBox.classList.remove("hidden");
+            resultText.className = "";
+            resultText.textContent = "Claude is processing your text...";
+
+            try {
+
+                const response = await fetch("/api/process", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        text: text
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Something went wrong.");
+                }
+
+                resultText.textContent = data.result;
+
+            } catch (error) {
+
+                resultText.textContent = error.message;
+                resultText.className = "error";
+
+            } finally {
+
+                processButton.disabled = false;
+                processButton.textContent = "Process Text";
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>
