@@ -1,6 +1,3 @@
-# CLI-Tool
-PYthon CLI tool that engages in interactive conversation/assisant bot using claude-haiku-4-5
-
 **Upendo Chama FAQ Bot**
 
 Answers chama members' questions about membership, contributions, meetings, fines, loans and savings using Claude Haiku 4.5 and a predefined knowledge base.
@@ -31,3 +28,30 @@ Enter `/quit` to exit.
 **Cost**
 
 API usage is charged according to Anthropic's Claude Haiku 4.5 pricing and the number of input and output tokens. Actual cost varies with question length and response size.
+# Customer Complaint Reply Generator
+
+**Live URL:** Add your Render URL here after deployment.
+
+A web tool for Nairobi shops, restaurants, courier services, Airbnbs, and other small businesses. Paste a complaint, click **Generate Reply**, and receive a concise, professional draft on the same page.
+
+## What it does
+
+- Acknowledges the customer's specific concern.
+- Uses a polite, calm, professional tone.
+- Suggests a clear and realistic next step.
+- Avoids blame, invented facts, and unconfirmed promises.
+- Displays the result without reloading the page.
+
+Review every draft and verify its facts before sending.
+
+## Technology
+
+Python, Flask, Anthropic Claude API, HTML, CSS, JavaScript Fetch API, and Gunicorn.
+
+## Run locally (Windows PowerShell)
+
+1. Create and activate a virtual environment:
+
+   ```powershell
+   py -m venv .venv
+   .\.venv\Scripts\Activate.ps1

@@ -2,3 +2,7 @@ Flask
 anthropic
 python-dotenv
 gunicorn
+Flask>=3.0,<4.0
+anthropic>=0.40.0
+python-dotenv>=1.0
+gunicorn>=22.0
