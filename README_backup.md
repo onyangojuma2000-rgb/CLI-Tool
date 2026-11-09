@@ -30,7 +30,7 @@ Enter `/quit` to exit.
 API usage is charged according to Anthropic's Claude Haiku 4.5 pricing and the number of input and output tokens. Actual cost varies with question length and response size.
 # Customer Complaint Reply Generator
 
-**Live URL:** Add your Render URL here after deployment.
+**Live URL:** https://complaint-reply-generator.onrender.com
 
 A web tool for Nairobi shops, restaurants, courier services, Airbnbs, and other small businesses. Paste a complaint, click **Generate Reply**, and receive a concise, professional draft on the same page.
 
